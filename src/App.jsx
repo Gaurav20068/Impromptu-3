@@ -37,7 +37,7 @@ import {
 } from 'lucide-react';
 
 // --- Firebase Configuration ---
-const firebaseConfig = JSON.parse(__firebase_config);
+const firebaseConfig = __firebase_config;
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -729,3 +729,4 @@ function QuestionForm({ roomCode, onClose, alias, user }) {
     </div>
   );
 }
+
