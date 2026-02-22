@@ -481,7 +481,7 @@ function RoomView({ room, profile, user, onLeave }) {
         )}
       </div>
 
-      <div className="sticky bottom-6 mt-4">
+      <div className="sticky bottom-0 pb-6 pt-4 mt-4 z-50 bg-[#0f0f12]/80 backdrop-blur-md">
         {isAsking ? (
           <QuestionForm 
             roomCode={room.roomCode} 
@@ -738,3 +738,4 @@ function QuestionForm({ roomCode, onClose, alias, user }) {
     </div>
   );
 }
+
