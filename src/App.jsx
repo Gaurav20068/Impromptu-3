@@ -665,13 +665,22 @@ function QuestionForm({ roomCode, onClose, alias, user }) {
         createdAt: Date.now(),
         options: type === 'poll' ? options.filter(o => o.trim()) : null
       };
+      // Send to database
       await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'questions'), qData);
-      onClose();
-    } catch (err) { console.error(err); }
+      
+      // Reset form and close
+      setText('');
+      setOptions(['', '']);
+      onClose(); 
+    } catch (err) { 
+      console.error(err); 
+      onClose(); // Force close even if network is slow
+    }
   };
 
   return (
-    <div className="bg-[#21212a] rounded-3xl p-6 border border-white/10 shadow-2xl space-y-6 animate-in slide-in-from-bottom-12 duration-300">
+    // FIX 1: Added 'relative z-50' here so it sits firmly above all background polls
+    <div className="relative z-50 bg-[#21212a] rounded-3xl p-6 border border-white/10 shadow-2xl space-y-6 animate-in slide-in-from-bottom-12 duration-300">
       <div className="flex justify-between items-center">
         <h4 className="text-lg font-black">New Anonymous Post</h4>
         <button onClick={onClose} className="text-slate-500 font-bold">Cancel</button>
@@ -729,4 +738,3 @@ function QuestionForm({ roomCode, onClose, alias, user }) {
     </div>
   );
 }
-
